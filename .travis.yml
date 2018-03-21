@@ -1,0 +1,20 @@
+language: python
+python: '2.7'
+sudo: required
+services:
+- docker
+branches:
+  only:
+  - master
+  - dev
+env:
+  global:
+  matrix:
+    - VARIANT=onbuild
+    - VARIANT=shell
+
+script:
+  - docker login -u $HUB_USER -p $HUB_PASS
+  - docker build --no-cache -t $HUB_USER/multipy:$VARIANT -f $VARIANT.Dockerfile .
+  - docker push $HUB_USER/multipy:$VARIANT
+  - if [ $VARIANT == "onbuild" ]; then docker tag $HUB_USER/multipy:$TAG $HUB_USER/multipy; docker push $HUB_USER/multipy; fi
