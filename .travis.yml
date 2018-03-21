@@ -9,12 +9,14 @@ branches:
   - dev
 env:
   global:
+  - secure: yDJ+2n6x/04FWzMdgNh59DIA8DrmlzzGRE7HQyHHRM6VCT2cN6pMPSIzlt/YR3thwf0QfcC3ZK+AWe7avucDMovZ3FrtUjpdIkg5rx3DtI7Dv0yNqs4p3wMST6IxxQuC3i2iokfx58T0IpoLDkPbypznNl1tqI+GVSCsq+34OBKCwONZJP9YtYZNjJ4w/TPWoqv9ErqhkSm9sCd9I1PCEdMgw//MKoDrx1a859sCEvDMJa9wbYiKq19n24BQFQIZbRSm+deNpeGRdNLNnvq87zMCS1cbwpvwyG0dnySC5S9EAPTTdLgPdMhG48/2V8GxMEZER01cupTnEwLQ9qc0s9mYmLTQjMVX8rWYgtaqnqUhtFe2XRf7yWZr7zZZ430efMFx/3Y1nazwSk4TFm0NxOd+4ADkccey6tgXtlE7oXt8bfHjbO4/YYsSIjjznUi5cvtWYSrfG9vTx4BZy19jTIpFfmx7BujZpNvjeExERCvBD/iHcoDuv5dxuqHZS8TJRU13guSVznjnEz+dcqzg59XPI3M7EDdD/uWElRE9Cd8YawDbNjkovaDQhmCmVjly4xFmFEGAtBzw2q9p8EW+VYF3RNIWEOeNK7cH+wWmIMsZwyKUv/fwI7l+7vDNO5Y02i5g09wTFeKPmTJLFbRKJvz7b7TTZ3JCpjeRWE0Rt3o=
+  - secure: NuCjWvOBmRwCr7r6af3JQ9PPboVWigjD5FVb098tfdW/h01IIzw4m6R9W5MSUCyurSZrtmMDx7cdVrRgOUi4qbcSyTSxcO/r0DfSn3/GX5G4Qf0ywyLD/Vzs899MF2TQ7bEhHnJXNSdIejs7vrzs4gujOBtPlEjNjmmJa2zCy9GxA0knIdEIqOyQHJm61DCzWZe9GsB0UHeyi+m2T17JW7OBGeAvTznbbZejtq1pP8Iyw7fKPQjisoV5B/y1HmQNZweY2FxcS3VIbKf/F1WIOKkn/M70WFu7lb/8TU2aqFWKqXVe8B/NGZ4kkTSf7rjrbsHdFn7/xD6PDgXrqQDbDhPjNDuy7J1Sq/W5gUGjh2hC+qRa1GwG+WGLhz15lc99Oj4z8+hOyv7SFrweQMZZfRBbLheJfhJYZfKo6NAkXtSUW3uaQo7PujxNp6UiqA/ZR4n/uGlKDYu8FbhtFBfIt9vk1slDejHOpYsnwDhBAHkvUuaPUcn17vCGrkSHKvc9JKLDsIz73v86FRCacBphnd3rirtiJTGpxoKxRN1propKLPZthRfzAAGw9X3935eZ4zJN05zYDPD6v7EKGSN3P6hzzoXuhrNohIZonakweOndOWAstii/ixdcLoHcRqaiJtr7ANmwQAMOpfxah5gNbaAqac8PfFNiDN6rhlOk/9o=
   matrix:
-    - VARIANT=onbuild
-    - VARIANT=shell
-
+  - VARIANT=onbuild
+  - VARIANT=shell
 script:
-  - docker login -u $HUB_USER -p $HUB_PASS
-  - docker build --no-cache -t $HUB_USER/multipy:$VARIANT -f $VARIANT.Dockerfile .
-  - docker push $HUB_USER/multipy:$VARIANT
-  - if [ $VARIANT == "onbuild" ]; then docker tag $HUB_USER/multipy:$TAG $HUB_USER/multipy; docker push $HUB_USER/multipy; fi
+- docker login -u $HUB_USER -p $HUB_PASS
+- docker build --no-cache -t $HUB_USER/multipy:$VARIANT -f $VARIANT.Dockerfile .
+- docker push $HUB_USER/multipy:$VARIANT
+- if [ $VARIANT == "onbuild" ]; then docker tag $HUB_USER/multipy:$TAG $HUB_USER/multipy;
+  docker push $HUB_USER/multipy; fi
