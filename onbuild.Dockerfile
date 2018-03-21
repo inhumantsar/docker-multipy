@@ -23,7 +23,7 @@ RUN apk add --no-cache \
       openssl-dev \
       sqlite-dev \
       libffi-dev \
-    && pip install tox tox-pyenv
+    && pip install tox tox-pyenv \
     && git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT \
     && echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> /root/.bashrc
 
