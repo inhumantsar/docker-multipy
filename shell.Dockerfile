@@ -9,6 +9,8 @@ VOLUME /workspace
 ENV WORKSPACE /workspace
 WORKDIR /workspace
 
+ADD default_pythons.txt /tmp/
+
 RUN apk add --no-cache \
       bash \
       git \
@@ -26,6 +28,6 @@ RUN apk add --no-cache \
     && pip install tox tox-pyenv \
     && git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT \
     && echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> /root/.bashrc \
-    && /bin/bash -c 'xargs -n 1 pyenv install < default_pythons.txt'
+    && /bin/bash -c 'xargs -n 1 pyenv install < /tmp/default_pythons.txt'
 
 CMD /bin/bash
